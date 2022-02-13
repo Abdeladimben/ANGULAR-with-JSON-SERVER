@@ -1,0 +1,19 @@
+.truee{
+    color: blue;
+    
+    background-color:#aa9c9c49;
+}
+.falsee{
+    color: rgb(143, 19, 19);
+    
+    background-color:#aa9c9c49;
+}
+.disp{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ajout{
+    width:-webkit-fill-available;
+    margin: 5px 0;
+}

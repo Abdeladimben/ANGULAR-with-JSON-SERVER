@@ -1,0 +1,55 @@
+<div class="row my-4">
+    <div class="col-md-6">
+        <h3>List of Tasks</h3>
+    </div>
+    <div class="col-md-6">
+        <button (click)="showForm = !showForm" class="btn btn dark btn-sm">
+            <i class="fa fa-plus"></i>New Task
+        </button>
+    </div>
+</div>
+
+<div class="row" >
+    <div class="col-md-6 mx-auto">
+        <div *ngIf="showForm">
+            <div class="form-group">
+                <label for="label">label</label>
+                <input [(ngModel)]="myTasks.label" id="label" type="text" class="form-control">
+            </div>
+            
+            <div class="form-check">
+            <label class="form-check-label">
+                <input [(ngModel)]="myTasks.completed" type="checkbox" class="form-check-input" >
+                completed
+            </label>
+            {{myTasks | json}}
+            </div>
+            <button *ngIf="!editForm" (click)="persistTask()" class="btn btn-success btn-block ajout">
+                <i class="fa fa-send "></i> New Task
+            </button>
+            <button *ngIf="editForm" (click)="updateTask()" class="btn btn-warning btn-block ajout">
+                <i class="fa fa-refresh "></i> Update Task
+            </button>
+        </div>
+        <input (keyup)="searchTask()" [(ngModel)]="searchText" placeholder="Search ..." type="text" class="form-control">
+        <ul class="list-group">            
+            <li *ngFor="let task of resultTask" class="list-group-item disp">
+                <button (click)="editTask(task)" class="btn btn-warning btn-sm">g<i class="fa fa-pencil"></i></button>
+                {{task.label}}
+                <span (click)="toogleCompleted(task.id,task)" [ngClass]="{
+                        'truee':task.completed,
+                        'falsee':!task.completed
+                    }" 
+                    class="badge badge-danger badge-pill"
+                >
+                    <i [ngClass]="{
+                        'fa-thumbs-up':task.completed,
+                        'fa-thumbs-down':!task.completed
+                    }"
+                    class="fa fa-thumbs-up"></i>
+                </span>
+                <button (click)="deleteTask(task.id)" class="btn btn-sm btn-dark">g<i class="fa fa-trash"></i></button>
+            </li>
+        </ul>
+    </div>
+</div>
